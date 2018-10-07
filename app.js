@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors=require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var deleteMultipleUsers = require('./routes/deleteMultipleUsers');
 
 var user=require('./routes/user_routes');
 var signup=require('./routes/signup_routes');
@@ -26,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/user',user);
 app.use('/signup',signup);
+app.use('/deleteMultipleUsers',deleteMultipleUsers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

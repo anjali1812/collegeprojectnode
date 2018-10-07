@@ -13,6 +13,8 @@ router.get('/',function(req,res,next){
     });
 });
 
+
+
 router.delete('/:email_id',function(req,res,next){
     users.deleteUser(req.params.email_id,function(err,rows){
         if(err){

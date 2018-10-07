@@ -5,8 +5,12 @@ var user={
         return db.query("select * from user_table",callback);
     },
 
+    getUsersById:function(email_id,callback){
+        return db.query("select * from user_table where email_id=?",[email_id],callback);
+    },
+
     signup:function(item,callback){
-        return db.query("insert into user_table(email_id,password,user_name,mobile_no,user_type,city,address) values(?,?,?,?,?,?,?)",[item.email_id,item.password,item.user_name,item.mobile_no,item.user_type,item.city,item.address]);
+        return db.query("insert into user_table (email_id,password,user_name,mobile_no,user_type,city,address) values(?,?,?,?,?,?,?)",[item.email_id,item.password,item.user_name,item.mobile_no,item.user_type,item.city,item.address],callback);
     },
 
     updateUser:function(email_id,item,callback){
@@ -15,6 +19,16 @@ var user={
 
     deleteUser:function(email_id,callback){
         return db.query("delete from user_table where email_id=?",[email_id],callback);
+    },
+
+    deleteMultipleUsers:function(item,callback){
+        var deleteUsersArray=[];
+
+        for(i=0;i<item.length;i++){
+            this.deleteUsersArray[i]=item[i].email_id;
+        }
+
+        return db.query("delete from user_table where email_id IN (?)",[deleteUsersArray],callback);
     }
 };
 
